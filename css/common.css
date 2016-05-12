@@ -1,0 +1,13 @@
+.box-container {
+    overflow: hidden;
+}
+
+.box-container .box {
+    float: left;
+    margin-right: 10px;
+}
+
+#create-thread p {
+    display: inline;
+}
+
