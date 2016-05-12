@@ -1,0 +1,24 @@
+.box-container {
+    overflow: hidden;
+}
+
+.box-container .box {
+    float: left;
+    margin-right: 10px;
+}
+
+#create-thread p {
+    display: inline;
+}
+
+#thread-list table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#thread-list table thead, tbody {
+    border-bottom: solid 1px;
+    text-align: left;
+}
+
