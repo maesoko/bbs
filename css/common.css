@@ -11,3 +11,14 @@
     display: inline;
 }
 
+#thread-list table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#thread-list table thead, tbody {
+    border-bottom: solid 1px;
+    text-align: left;
+}
+
