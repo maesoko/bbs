@@ -3,7 +3,7 @@
 class BbsThread {
     private $id;
     private $title;
-    private $commentCount;
+    private $comments;
     private $creationDate;
 
     /**
@@ -16,7 +16,7 @@ class BbsThread {
     public function __construct($id, $title, $comments, $creationDate) {
         $this->id = $id;
         $this->title = $title;
-        $this->commentCount = $comments;
+        $this->comments = $comments;
         $this->creationDate = $creationDate;
     }
 
@@ -38,8 +38,8 @@ class BbsThread {
     /**
      * @return int レスの数を返す。
      */
-    public function getCommentCount() {
-        return $this->commentCount;
+    public function getComments() {
+        return $this->comments;
     }
 
     /**
