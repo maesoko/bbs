@@ -13,8 +13,7 @@ class BbsThread {
      * @param $comments int スレッドのレスの数
      * @param $creationDate string スレッドの作成日(yyyy-MM-dd)
      */
-    public function __construct($id, $title, $comments, $creationDate)
-    {
+    public function __construct($id, $title, $comments, $creationDate) {
         $this->id = $id;
         $this->title = $title;
         $this->commentCount = $comments;
@@ -25,34 +24,29 @@ class BbsThread {
     /**
      * @return int スレッドIDを返す。
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
      * @return string スレッドのタイトルを返す。
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
     /**
      * @return int レスの数を返す。
      */
-    public function getCommentCount()
-    {
+    public function getCommentCount() {
         return $this->commentCount;
     }
 
     /**
      * @return string スレッドの作成日を'yyyy-MM-dd'形式の文字列で返す。
      */
-    public function getCreationDate()
-    {
+    public function getCreationDate() {
         return $this->creationDate;
     }
-
 
 }
