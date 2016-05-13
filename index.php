@@ -24,9 +24,9 @@ $threadListView = new ThreadListView();
             <th>作成日</th>
         </tr>
         </thead>
+        <tbody>
         <!-- スレッド一覧 -->
         <?php echo $threadListView->showThreadList(); ?>
-        <tbody>
         </tbody>
     </table>
 
