@@ -1,3 +1,7 @@
+<?php
+require_once('src/view/ThreadListView.php');
+$threadListView = new ThreadListView();
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,6 +24,8 @@
             <th>作成日</th>
         </tr>
         </thead>
+        <!-- スレッド一覧 -->
+        <?php echo $threadListView->showThreadList(); ?>
         <tbody>
         </tbody>
     </table>
