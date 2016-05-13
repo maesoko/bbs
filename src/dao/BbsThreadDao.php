@@ -13,7 +13,7 @@ class BbsThreadDao extends BaseDao {
         $sql .= 'ON t.id = r.thread_id ';
         $sql .= 'GROUP BY t.id;';
 
-        $stmt = $this->pdo->query($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
 
         $result = null;
