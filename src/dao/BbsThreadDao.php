@@ -8,8 +8,8 @@ class BbsThreadDao extends BaseDao {
      * @return array|null スレッド一覧の情報が入った配列を返す。スレッドが存在しない場合はnullを返す。
      */
     public function getAllThreads() {
-        $sql = 'SELECT t.id, t.title, COUNT(*) "comments", t.creation_date ';
-        $sql .= 'FROM thread t JOIN response r ';
+        $sql = 'SELECT t.id, t.title, COUNT(r.thread_id) "comments", t.creation_date ';
+        $sql .= 'FROM thread t LEFT JOIN response r ';
         $sql .= 'ON t.id = r.thread_id ';
         $sql .= 'GROUP BY t.id;';
 
