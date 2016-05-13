@@ -1,5 +1,5 @@
 <?php
-require_once('../constants/DbConstant.php');
+require_once(dirname(__FILE__) . './../constants/DbConstant.php');
 
 class BaseDao {
     protected $pdo;
