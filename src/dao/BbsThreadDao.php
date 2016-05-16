@@ -46,4 +46,14 @@ class BbsThreadDao extends BaseDao {
         
         return $this->pdo->lastInsertId();
     }
+    
+    
+    public function createThread($params) {
+        $threadId = self::insertThreadByTitle($params['title']);
+        $response = new BbsResponse(
+            null, $threadId, 1, $params['comment'], $params['name'], $params['mail_address'], null);
+
+        $responseDao = new BbsResponseDao();
+        return $responseDao->insertResponse($response);
+    }
 }
