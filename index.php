@@ -42,7 +42,7 @@ $threadListView = new ThreadListView();
 <div id="create-thread">
     <form action="CreateThread.php" method="POST">
         <p>
-            タイトル: <input type="text" name="title" size="50">
+            タイトル: <input type="text" name="title" size="50" required>
         </p>
 
         <div class="box-container">
