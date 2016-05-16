@@ -48,7 +48,7 @@ $threadListView = new ThreadListView();
         <div class="box-container">
             <div class="box">
                 <p>
-                    名前: <input type="text" name="nickname">
+                    名前: <input type="text" name="name">
                 </p>
             </div>
             <div class="box">
