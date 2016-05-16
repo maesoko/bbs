@@ -1,6 +1,8 @@
 <?php
 require_once('BaseView.php');
 require_once(dirname(__FILE__) . './../dao/BbsThreadDao.php');
+require_once(dirname(__FILE__) . './../model/BbsResponse.php');
+require_once(dirname(__FILE__) . './../dao/BbsResponseDao.php');
 
 class CreateThreadView extends BaseView {
 
@@ -11,11 +13,9 @@ class CreateThreadView extends BaseView {
         parent::__construct(new BbsThreadDao());
     }
     
-    public function createThread() {
-        $title = $_POST['title'];
-        $insertId = $this->dao->insertThreadByTitle($title);
-
-        return "スレッド作成: " . $insertId;
+    public function createThread($params) {
+        $thread = $this->dao->createThread($params);
+        return "スレッド作成:" . $thread->getThreadId();
     }
     
 }

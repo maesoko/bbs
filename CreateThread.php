@@ -12,7 +12,7 @@ $createThreadView = new CreateThreadView();
 </head>
 <body>
 
-<p><?php echo $createThreadView->createThread() ?></p>
+<p><?php echo $createThreadView->createThread($_POST) ?></p>
 
 <a href="index.php">スレッド一覧に戻る</a>
 </body>
