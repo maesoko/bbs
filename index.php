@@ -40,7 +40,7 @@ $threadListView = new ThreadListView();
 
 <h2>スレッド作成</h2>
 <div id="create-thread">
-    <form action="src/hoge.php" method="POST">
+    <form action="CreateThread.php" method="POST">
         <p>
             タイトル: <input type="text" name="title" size="50">
         </p>
