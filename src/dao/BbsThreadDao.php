@@ -29,4 +29,19 @@ class BbsThreadDao extends BaseDao {
 
         return $result;
     }
+
+    /**
+     * $titleで指定されたタイトル名でスレッドを新規作成する
+     * @param $title string 新規作成するスレッドのタイトル
+     * @return mixed 追加したレコードのIDを返す
+     */
+    public function insertThreadByTitle($title) {
+        $sql = "INSERT INTO thread (title) ";
+        $sql .= "VALUES ('{$title}');";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        
+        return $this->pdo->lastInsertId();
+    }
 }
