@@ -17,7 +17,7 @@ class ThreadListView extends BaseView {
     public function showThreadList() {
         $result = "";
         $threadList = $this->dao->getAllThreads();
-        foreach ($threadList as $thread) {
+        foreach ((array)$threadList as $thread) {
             $result .= "<tr>";
             $result .= "<td>{$thread->getId()}</td>";
             $result .= "<td>{$thread->getTitle()}</td>";
