@@ -1,6 +1,8 @@
 <?php
 require_once('BaseDao.php');
 require_once(dirname(__FILE__) . './../model/BbsThread.php');
+require_once(dirname(__FILE__) . './../model/BbsResponse.php');
+require_once(dirname(__FILE__) . './../dao/BbsResponseDao.php');
 
 class BbsThreadDao extends BaseDao {
 
