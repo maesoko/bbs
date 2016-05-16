@@ -5,9 +5,11 @@ require_once(dirname(__FILE__) . './../model/BbsThread.php');
 class BbsThreadDao extends BaseDao {
 
     /**
-     * @return array|null スレッド一覧の情報が入った配列を返す。スレッドが存在しない場合はnullを返す。
+     * スレッドの一覧を取得する。
+     * @return array|null スレッド一覧の情報が入ったBbsThreadクラスの配列を返す。スレッドが存在しない場合はnullを返す。
      */
     public function getAllThreads() {
+        // (スレッドID, スレッドタイトル, レス数, 作成日)を取得するSQL
         $sql = 'SELECT t.id, t.title, COUNT(r.thread_id) "comments", t.creation_date ';
         $sql .= 'FROM thread t LEFT JOIN response r ';
         $sql .= 'ON t.id = r.thread_id ';
