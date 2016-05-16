@@ -63,7 +63,7 @@ $threadListView = new ThreadListView();
         </p>
         <br />
         <p>
-            <input type="submit" value="新規スレッド作成">
+            <button type="submit" name="insert_thread">新規スレッド作成</button>
         </p>
     </form>
 </div>
