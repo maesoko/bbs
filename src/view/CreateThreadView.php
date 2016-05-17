@@ -11,6 +11,7 @@ class CreateThreadView extends BaseView {
         parent::__construct(new BbsThreadDao());
     }
     
+    //TODO:一つの関数に複数の処理が集中しすぎているので、daoを分けて処理する
     public function createThread($params) {
         $thread = $this->dao->createThread($params);
         return "スレッド作成:" . $thread->getThreadId();
