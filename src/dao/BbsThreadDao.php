@@ -48,8 +48,12 @@ class BbsThreadDao extends BaseDao {
         
         return $this->pdo->lastInsertId();
     }
-    
-    
+
+    /**
+     * $paramsに渡された情報を元にスレッドを新規作成し、そのスレッドに1番目のレスを追加
+     * @param $params array スレッドタイトルとレスの値が入った配列
+     * @return BbsResponse 追加した１番目のレスの情報が入ったBbsResponseオブジェクトを返す。
+     */
     public function createThread($params) {
         $threadId = self::insertThreadByTitle($params['title']);
         $response = new BbsResponse(
