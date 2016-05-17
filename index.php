@@ -31,8 +31,8 @@ $threadListView = new ThreadListView();
     </table>
 
     <div class="box-container">
-        <div class="box"><a href="#">＜＜前の10件</a></div>
-        <div class="box"><a href="#">次の10件＞＞</a></div>
+        <div class="box"><p class="page"><a href="#">＜＜前の10件</a></p></div>
+        <div class="box"><p class="page"><a href="#">次の10件＞＞</a></p></div>
     </div>
 </div>
 

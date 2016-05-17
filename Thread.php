@@ -19,8 +19,8 @@ if (isset($_GET['thread-id'])) {
 <body>
 <div class="box-container">
     <div class="box"><a href="index.php">■掲示板に戻る■</a></div>
-    <div class="box"><a href="#">＜＜前の10件</a></div>
-    <div class="box"><a href="#">次の10件＞＞</a></div>
+    <div class="box"><p class="page"><a href="#">＜＜前の10件</a></p></div>
+    <div class="box"><p class="page"><a href="#">次の10件＞＞</a></p></div>
 </div>
 <hr />
 <h1 id="thread-title"><?php echo $threadView->getThread()->getTitle()?></h1>
@@ -32,9 +32,10 @@ if (isset($_GET['thread-id'])) {
 
         ?>
         <div class="box-container">
-            <div class="box"><?php echo $response->getCommentNumber() ?>:</div>
-            <div class="box"><?php echo $response->getName() ?>:</div>
-            <div class="box"><?php echo $response->getWriteDate() ?></div>
+            <div class="box"><p class="comment-number"><?php echo $response->getCommentNumber() ?></p></div>
+            <div class="box"><p class="name">名前:<?php echo $response->getName() ?></p></div>
+            <div class="box"><p class="mail-address">[<?php echo $response->getMailAddress() ?>]</p></div>
+            <div class="box"><p class="post-date">投稿日:<?php echo $response->getWriteDate() ?></p></div>
         </div>
 
         <p class="comment"><?php echo $response->getComment() ?></p>
