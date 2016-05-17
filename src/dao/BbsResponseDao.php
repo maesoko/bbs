@@ -3,6 +3,11 @@ require_once(dirname(__FILE__) . './../model/BbsResponse.php');
 
 class BbsResponseDao extends BaseDao {
 
+    /**
+     * レスポンステーブルにレスポンスを追加する
+     * @param BbsResponse $response 追加するレスポンスの情報が入ったBbsResponseオブジェクト
+     * @return BbsResponse 追加した結果レコード情報が入ったBbsResponseオブジェクトを返す。
+     */
     public function insertResponse(BbsResponse $response) {
         $sql = "INSERT INTO response (thread_id, comment_number, comment, name, mail_address)
                 VALUES (:thread_id, :comment_number, :comment, :name, :mail_address)";
