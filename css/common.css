@@ -27,3 +27,8 @@
     display: inline;
 }
 
+#bbs-response .comment {
+    margin-left: 30px;
+    display: inline;
+}
+
