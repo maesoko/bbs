@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . '/src/view/CreateThreadView.php');
-$createThreadView = new CreateThreadView();
+$createThreadView = new CreateThreadView($_POST);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -12,8 +12,15 @@ $createThreadView = new CreateThreadView();
 </head>
 <body>
 
-<p><?php echo $createThreadView->createThread($_POST) ?></p>
+<p><?php echo $createThreadView->showResult() ?></p>
 
-<a href="index.php">スレッド一覧に戻る</a>
+<div class="box-container">
+    <div class="box"><p id="bbs-back"><a href="index.php">■掲示板に戻る■</a></p></div>
+    <div class="box">
+        <p class="page">
+            <a href="Thread.php?thread-id=<?php echo $createThreadView->getThread()->getId() ?>">スレッドへ移動</a>
+        </p>
+    </div>
+</div>
 </body>
 </html>
