@@ -18,6 +18,11 @@ class BbsResponseDao extends BaseDao {
         return $this->getResponseById($this->pdo->lastInsertId());
     }
 
+    /**
+     * $idで指定されたレスポンスを取得する。
+     * @param $id int 取得したいレスポンスのID
+     * @return BbsResponse レスポンスの情報が入ったBbsResponseオブジェクトを返す。
+     */
     public function getResponseById($id) {
         $sql = "SELECT * FROM response WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
