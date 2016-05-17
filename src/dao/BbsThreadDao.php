@@ -8,7 +8,7 @@ class BbsThreadDao extends BaseDao {
 
     /**
      * スレッドの一覧を取得する。
-     * @return array|null スレッド一覧の情報が入ったBbsThreadクラスの配列を返す。スレッドが存在しない場合はnullを返す。
+     * @return array|null スレッド一覧の情報が入ったBbsThreadListクラスの配列を返す。スレッドが存在しない場合はnullを返す。
      */
     public function getAllThreads() {
         // (スレッドID, スレッドタイトル, レス数, 作成日)を取得するSQL
