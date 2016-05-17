@@ -18,12 +18,13 @@ class ThreadListView extends BaseView {
         $result = "";
         $threadList = $this->dao->getAllThreads();
         foreach ((array)$threadList as $thread) {
-            $result .= "<tr>";
-            $result .= "<td>{$thread->getId()}</td>";
-            $result .= "<td>{$thread->getTitle()}</td>";
-            $result .= "<td>{$thread->getComments()}</td>";
-            $result .= "<td>{$thread->getCreationDate()}</td>";
-            $result .= "</tr>" . PHP_EOL;
+            $result .= "<tr>
+                        <td>{$thread->getId()}</td>
+                        <td>{$thread->getTitle()}</td>
+                        <td>{$thread->getComments()}</td>
+                        <td>{$thread->getCreationDate()}</td>
+                        </tr>"
+                        . PHP_EOL;
         }
 
         return $result;
