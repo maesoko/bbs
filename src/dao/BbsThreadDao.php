@@ -2,6 +2,7 @@
 require_once('BaseDao.php');
 require_once(dirname(__FILE__) . './../model/BbsThreadList.php');
 require_once(dirname(__FILE__) . './../model/BbsResponse.php');
+require_once(dirname(__FILE__) . './../model/BbsThread.php');
 require_once(dirname(__FILE__) . './../dao/BbsResponseDao.php');
 
 class BbsThreadDao extends BaseDao {
@@ -61,5 +62,20 @@ class BbsThreadDao extends BaseDao {
 
         $responseDao = new BbsResponseDao();
         return $responseDao->insertResponse($response);
+    }
+
+    /**
+     * @param $id int 取得したいスレッドのID
+     * @return BbsThread スレッドの情報が入ったBbsThreadクラスのインスタントを返す
+     */
+    public function getThreadById($id) {
+        $sql = "SELECT * FROM thread WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $record = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return new BbsThread($record['id'], $record['title'], $record['creation_date']);
     }
 }
