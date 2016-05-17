@@ -25,5 +25,24 @@ if (isset($_GET['thread-id'])) {
 <hr />
 <h1 id="thread-title"><?php echo $threadView->getThread()->getTitle()?></h1>
 
+<div id="bbs-response">
+    <?php
+    $responseList = $threadView->getResponseList();
+    foreach ((array)$responseList as $response) {
+
+        ?>
+        <div class="box-container">
+            <div class="box"><?php echo $response->getCommentNumber() ?>:</div>
+            <div class="box"><?php echo $response->getName() ?>:</div>
+            <div class="box"><?php echo $response->getWriteDate() ?></div>
+        </div>
+
+        <p class="comment"><?php echo $response->getComment() ?></p>
+
+        <?php
+    }
+    ?>
+</div>
+
 </body>
 </html>

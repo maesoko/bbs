@@ -1,9 +1,13 @@
 <?php
 require_once(dirname(__FILE__) . './../dao/BbsThreadDao.php');
+require_once(dirname(__FILE__) . './../dao/BbsResponseDao.php');
 
 class ThreadView {
-    private $thread;
     private $threadDao;
+    private $responseDao;
+
+    private $thread;
+    private $responseList;
 
     /**
      * ThreadView constructor.
@@ -11,7 +15,10 @@ class ThreadView {
      */
     public function __construct($threadId) {
         $this->threadDao = new BbsThreadDao();
+        $this->responseDao = new BbsResponseDao();
+        
         $this->thread = $this->threadDao->getThreadById($threadId);
+        $this->responseList = $this->responseDao->getAllResponseByThreadId($threadId);
     }
 
     /**
@@ -21,4 +28,12 @@ class ThreadView {
         return $this->thread;
     }
 
+    /**
+     * @return array|null スレッドのレスポンスリストを返す
+     */
+    public function getResponseList() {
+        return $this->responseList;
+    }
+
+    
 }
