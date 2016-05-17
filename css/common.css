@@ -22,3 +22,8 @@
     text-align: left;
 }
 
+#thread-title {
+    color: brown;
+    display: inline;
+}
+
