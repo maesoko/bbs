@@ -18,15 +18,27 @@ class ThreadListView extends BaseView {
         $result = "";
         $threadList = $this->dao->getAllThreads();
         foreach ((array)$threadList as $thread) {
-            $result .= "<tr>
-                        <td>{$thread->getId()}</td>
-                        <td>{$thread->getTitle()}</td>
-                        <td>{$thread->getComments()}</td>
-                        <td>{$thread->getCreationDate()}</td>
-                        </tr>"
-                        . PHP_EOL;
+            $result .= self::convertThreadIntoHtml($thread);
         }
 
         return $result;
+    }
+
+    /**
+     * タイトルの項目には<a>タグでスレッドIDをスレッド表示画面に渡している。
+     * @param $thread BbsThread スレッド情報が入ったBbsThreadオブジェクト
+     * @return string スレッドの情報を<tr>,<td>タグで囲んだ文字列で返す。
+     */
+    private function convertThreadIntoHtml($thread) {
+        $threadRow = "
+                <tr>
+                <td>{$thread->getId()}</td>
+                <td><a href='Thread.php?thread-id={$thread->getId()}'>{$thread->getTitle()}</a></td>
+                <td>{$thread->getComments()}</td>
+                <td>{$thread->getCreationDate()}</td>
+                </tr>
+                " . PHP_EOL;
+
+        return $threadRow;
     }
 }
