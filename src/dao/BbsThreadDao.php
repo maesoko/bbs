@@ -12,10 +12,10 @@ class BbsThreadDao extends BaseDao {
      */
     public function getAllThreads() {
         // (スレッドID, スレッドタイトル, レス数, 作成日)を取得するSQL
-        $sql = 'SELECT t.id, t.title, COUNT(r.thread_id) "comments", t.creation_date ';
-        $sql .= 'FROM thread t LEFT JOIN response r ';
-        $sql .= 'ON t.id = r.thread_id ';
-        $sql .= 'GROUP BY t.id;';
+        $sql = 'SELECT t.id, t.title, COUNT(r.thread_id) "comments", t.creation_date
+                FROM thread t LEFT JOIN response r
+                ON t.id = r.thread_id 
+                GROUP BY t.id;';
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
