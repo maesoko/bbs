@@ -11,8 +11,9 @@
     display: inline;
 }
 
-#create-thread p {
+#create-thread p, #post-response p {
     display: inline;
+    margin-right: 10px;
 }
 
 #thread-list table {

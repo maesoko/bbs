@@ -45,5 +45,31 @@ if (isset($_GET['thread-id'])) {
     ?>
 </div>
 
+<hr />
+<div id="post-response">
+    <form action="hoge.php" method="POST">
+        <div class="box-container">
+            <div class="box">
+                <p>
+                    名前: <input type="text" name="name">
+                </p>
+            </div>
+            <div class="box">
+                <p>
+                    E-mail: <input type="email" name="mail_address" size="30">
+                </p>
+            </div>
+        </div>
+
+        <p>
+            内容: <br /><textarea name="comment" cols="70" rows="10" ></textarea>
+        </p>
+        <br />
+        <p>
+            <button type="submit" name="insert_thread">書き込む</button>
+        </p>
+    </form>
+</div>
+
 </body>
 </html>
