@@ -1,38 +1,19 @@
 <?php
+require_once('BbsThread.php');
 
-class BbsThreadList {
-    private $id;
-    private $title;
+class BbsThreadList extends BbsThread {
     private $comments;
-    private $creationDate;
 
     /**
      * BbsThread constructor.
      * @param $id int スレッドID
      * @param $title string スレッドのタイトル
-     * @param $comments int スレッドのレスの数
      * @param $creationDate string スレッドの作成日(yyyy-MM-dd)
+     * @param $comments int スレッドのレスの数
      */
-    public function __construct($id, $title, $comments, $creationDate) {
-        $this->id = $id;
-        $this->title = $title;
+    public function __construct($id, $title, $creationDate, $comments) {
+        parent::__construct($id, $title, $creationDate);
         $this->comments = $comments;
-        $this->creationDate = $creationDate;
-    }
-
-
-    /**
-     * @return int スレッドIDを返す。
-     */
-    public function getId() {
-        return $this->id;
-    }
-
-    /**
-     * @return string スレッドのタイトルを返す。
-     */
-    public function getTitle() {
-        return $this->title;
     }
 
     /**
@@ -40,13 +21,6 @@ class BbsThreadList {
      */
     public function getComments() {
         return $this->comments;
-    }
-
-    /**
-     * @return string スレッドの作成日を'yyyy-MM-dd'形式の文字列で返す。
-     */
-    public function getCreationDate() {
-        return $this->creationDate;
     }
 
 }

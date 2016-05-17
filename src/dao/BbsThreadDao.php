@@ -26,8 +26,8 @@ class BbsThreadDao extends BaseDao {
             $result[] = new BbsThreadList(
                 $record["id"],
                 $record["title"],
-                $record["comments"],
-                $record["creation_date"]
+                $record["creation_date"],
+                $record["comments"]
             );
         }
 
