@@ -1,6 +1,6 @@
 <?php
 
-class BbsThread {
+class BbsThreadList {
     private $id;
     private $title;
     private $comments;
