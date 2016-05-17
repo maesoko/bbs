@@ -38,30 +38,16 @@ class BbsThreadDao extends BaseDao {
     /**
      * $titleで指定されたタイトル名でスレッドを新規作成する
      * @param $title string 新規作成するスレッドのタイトル
-     * @return mixed 追加したレコードのIDを返す
+     * @return BbsThread 追加したスレッドの情報が入ったBbsThreadクラスのインスタントを返す。
      */
     public function insertThreadByTitle($title) {
-        $sql = "INSERT INTO thread (title)
-                VALUES ('{$title}');";
+        $sql = "INSERT INTO thread (title) VALUES (:title)";
 
         $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->execute();
         
-        return $this->pdo->lastInsertId();
-    }
-
-    /**
-     * $paramsに渡された情報を元にスレッドを新規作成し、そのスレッドに1番目のレスを追加
-     * @param $params array スレッドタイトルとレスの値が入った配列
-     * @return BbsResponse 追加した１番目のレスの情報が入ったBbsResponseオブジェクトを返す。
-     */
-    public function createThread($params) {
-        $threadId = self::insertThreadByTitle($params['title']);
-        $response = new BbsResponse(
-            null, $threadId, 1, $params['comment'], $params['name'], $params['mail_address'], null);
-
-        $responseDao = new BbsResponseDao();
-        return $responseDao->insertResponse($response);
+        return self::getThreadById($this->pdo->lastInsertId());
     }
 
     /**
