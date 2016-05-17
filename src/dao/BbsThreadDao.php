@@ -1,6 +1,6 @@
 <?php
 require_once('BaseDao.php');
-require_once(dirname(__FILE__) . './../model/BbsThread.php');
+require_once(dirname(__FILE__) . './../model/BbsThreadList.php');
 require_once(dirname(__FILE__) . './../model/BbsResponse.php');
 require_once(dirname(__FILE__) . './../dao/BbsResponseDao.php');
 
@@ -23,7 +23,7 @@ class BbsThreadDao extends BaseDao {
         $result = null;
         $records = $stmt->fetchAll();
         foreach ($records as $record) {
-            $result[] = new BbsThread(
+            $result[] = new BbsThreadList(
                 $record["id"],
                 $record["title"],
                 $record["comments"],

@@ -26,7 +26,7 @@ class ThreadListView extends BaseView {
 
     /**
      * タイトルの項目には<a>タグでスレッドIDをスレッド表示画面に渡している。
-     * @param $thread BbsThread スレッド情報が入ったBbsThreadオブジェクト
+     * @param $thread BbsThreadList スレッド情報が入ったBbsThreadListオブジェクト
      * @return string スレッドの情報を<tr>,<td>タグで囲んだ文字列で返す。
      */
     private function convertThreadIntoHtml($thread) {
