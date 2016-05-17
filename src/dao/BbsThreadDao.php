@@ -14,7 +14,7 @@ class BbsThreadDao extends BaseDao {
         // (スレッドID, スレッドタイトル, レス数, 作成日)を取得するSQL
         $sql = 'SELECT t.id, t.title, COUNT(r.thread_id) "comments", t.creation_date
                 FROM thread t LEFT JOIN response r
-                ON t.id = r.thread_id 
+                ON t.id = r.thread_id
                 GROUP BY t.id;';
 
         $stmt = $this->pdo->prepare($sql);
@@ -40,8 +40,8 @@ class BbsThreadDao extends BaseDao {
      * @return mixed 追加したレコードのIDを返す
      */
     public function insertThreadByTitle($title) {
-        $sql = "INSERT INTO thread (title) ";
-        $sql .= "VALUES ('{$title}');";
+        $sql = "INSERT INTO thread (title)
+                VALUES ('{$title}');";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
