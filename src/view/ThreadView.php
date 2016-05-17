@@ -7,7 +7,7 @@ class ThreadView {
 
     /**
      * ThreadView constructor.
-     * @param $threadId int $_POST['thread-id']から取得したスレッドID
+     * @param $threadId int $_GET['thread-id']から取得したスレッドID
      */
     public function __construct($threadId) {
         $this->threadDao = new BbsThreadDao();
