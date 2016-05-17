@@ -18,7 +18,7 @@ if (isset($_GET['thread-id'])) {
 </head>
 <body>
 <div class="box-container">
-    <div class="box"><a href="index.php">■スレッド一覧へ</a></div>
+    <div class="box"><a href="index.php">■掲示板に戻る■</a></div>
     <div class="box"><a href="#">＜＜前の10件</a></div>
     <div class="box"><a href="#">次の10件＞＞</a></div>
 </div>
