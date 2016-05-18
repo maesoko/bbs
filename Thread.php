@@ -70,7 +70,7 @@ if (!is_null($threadView) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
 
         <p>
-            内容: <br /><textarea name="comment" cols="70" rows="10" ></textarea>
+            内容: <br /><textarea name="comment" cols="70" rows="10" required></textarea>
         </p>
         <br />
         <p>

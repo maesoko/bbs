@@ -9,6 +9,8 @@ class BbsResponse {
     private $mailAddress;
     private $writeDate;
 
+    const DEFAULT_NAME = "名無しさん";
+
     /**
      * BbsResponse constructor.
      * @param $id int|null
@@ -58,18 +60,16 @@ class BbsResponse {
     }
 
     /**
-     * @return null|string
+     * @return string
      */
     public function getName() {
-        //TODO: 値がnullの場合はデフォルト値を返すようにする
-        return $this->name;
+        return empty($this->name) ? self::DEFAULT_NAME : $this->name;
     }
 
     /**
      * @return null|string
      */
     public function getMailAddress() {
-        //TODO: 値がnullの場合はデフォルト値を返すようにする
         return $this->mailAddress;
     }
 

@@ -41,7 +41,7 @@ class ThreadView {
      * @param array $params $_POSTから取得したレスの情報
      */
     public function postResponse(array $params) {
-        $commentNumber = count(self::getResponseList());
+        $commentNumber = count(self::getResponseList()) + 1;
 
         $response = new BbsResponse(
             null,
