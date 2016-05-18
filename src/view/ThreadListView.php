@@ -1,7 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . './../dao/BbsThreadDao.php');
+require_once('BaseView.php');
 
-class ThreadListView {
+class ThreadListView extends BaseView {
     private $threadDao;
 
     /**
@@ -40,5 +41,14 @@ class ThreadListView {
                 " . PHP_EOL;
 
         return $threadRow;
+    }
+
+
+    /**
+     * 総レコード数を取得する
+     * @return int Viewで表示している件数ではなく、テーブルに保存されている総レコード数。int型にキャストして返却。
+     */
+    protected function getRowCount() {
+        return 0; //スタブ
     }
 }
