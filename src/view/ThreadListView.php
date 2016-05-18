@@ -1,5 +1,4 @@
 <?php
-require_once('BaseView.php');
 require_once(dirname(__FILE__) . './../dao/BbsThreadDao.php');
 
 class ThreadListView {
