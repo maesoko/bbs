@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . './../dao/BbsThreadDao.php');
 require_once(dirname(__FILE__) . './../dao/BbsResponseDao.php');
+require_once(dirname(__FILE__) . './../model/BbsResponse.php');
 
 class ThreadView {
     private $threadDao;
@@ -35,5 +36,24 @@ class ThreadView {
         return $this->responseList;
     }
 
-    
+    /**
+     * スレッドへの書き込みを行う
+     * @param array $params $_POSTから取得したレスの情報
+     */
+    public function postResponse(array $params) {
+        $commentNumber = count(self::getResponseList());
+
+        $response = new BbsResponse(
+            null,
+            self::getThread()->getId(),
+            $commentNumber,
+            $params['comment'],
+            $params['name'],
+            $params['mail_address'],
+            null
+        );
+
+        $this->responseDao->insertResponse($response);
+    }
+
 }

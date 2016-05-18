@@ -1,9 +1,17 @@
 <?php
 require_once(dirname(__FILE__) . '/src/view/ThreadView.php');
 
+$threadView = null;
 if (isset($_GET['thread-id'])) {
     $threadId = $_GET['thread-id'];
     $threadView = new ThreadView($threadId);
+}
+
+if (!is_null($threadView) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $threadView->postResponse($_POST);
+
+    //redirect
+    header("Location: " . $_SERVER['SCRIPT_NAME'] . "?thread-id=" . $threadView->getThread()->getId());
 }
 
 ?>
@@ -47,7 +55,7 @@ if (isset($_GET['thread-id'])) {
 
 <hr />
 <div id="post-response">
-    <form action="hoge.php" method="POST">
+    <form action="Thread.php?thread-id=<?php echo $threadView->getThread()->getId() ?>" method="POST">
         <div class="box-container">
             <div class="box">
                 <p>
@@ -66,7 +74,7 @@ if (isset($_GET['thread-id'])) {
         </p>
         <br />
         <p>
-            <button type="submit" name="insert_thread">書き込む</button>
+            <button type="submit">書き込む</button>
         </p>
     </form>
 </div>
