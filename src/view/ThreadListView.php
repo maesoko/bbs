@@ -2,13 +2,14 @@
 require_once('BaseView.php');
 require_once(dirname(__FILE__) . './../dao/BbsThreadDao.php');
 
-class ThreadListView extends BaseView {
+class ThreadListView {
+    private $threadDao;
 
     /**
      * ThreadListView constructor.
      */
     public function __construct() {
-        parent::__construct(new BbsThreadDao());
+        $this->threadDao = new BbsThreadDao();
     }
 
     /**
@@ -16,7 +17,7 @@ class ThreadListView extends BaseView {
      */
     public function showThreadList() {
         $result = "";
-        $threadList = $this->dao->getAllThreads();
+        $threadList = $this->threadDao->getAllThreads();
         foreach ((array)$threadList as $thread) {
             $result .= self::convertThreadIntoHtml($thread);
         }
