@@ -1,9 +1,17 @@
 <?php
 require_once(dirname(__FILE__) . '/src/view/ThreadView.php');
 
+$threadView = null;
 if (isset($_GET['thread-id'])) {
     $threadId = $_GET['thread-id'];
     $threadView = new ThreadView($threadId);
+}
+
+if (!is_null($threadView) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $threadView->postResponse($_POST);
+
+    //redirect
+    header("Location: " . $_SERVER['SCRIPT_NAME'] . "?thread-id=" . $threadView->getThread()->getId());
 }
 
 ?>
@@ -43,6 +51,32 @@ if (isset($_GET['thread-id'])) {
         <?php
     }
     ?>
+</div>
+
+<hr />
+<div id="post-response">
+    <form action="Thread.php?thread-id=<?php echo $threadView->getThread()->getId() ?>" method="POST">
+        <div class="box-container">
+            <div class="box">
+                <p>
+                    名前: <input type="text" name="name">
+                </p>
+            </div>
+            <div class="box">
+                <p>
+                    E-mail: <input type="email" name="mail_address" size="30">
+                </p>
+            </div>
+        </div>
+
+        <p>
+            内容: <br /><textarea name="comment" cols="70" rows="10" ></textarea>
+        </p>
+        <br />
+        <p>
+            <button type="submit">書き込む</button>
+        </p>
+    </form>
 </div>
 
 </body>
