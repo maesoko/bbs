@@ -96,4 +96,15 @@ class BbsThreadDao extends BaseDao {
         
         return new BbsThread($record['id'], $record['title'], $record['creation_date']);
     }
+
+    /**
+     * @return int threadテーブルの総レコード数を返す
+     */
+    public function getMaxRowCount() {
+        $sql = 'SELECT * FROM thread';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        
+        return $stmt->rowCount();
+    }
 }
