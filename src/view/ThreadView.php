@@ -9,7 +9,6 @@ class ThreadView extends BaseView {
     private $responseDao;
 
     private $thread;
-    private $responseList;
 
     const LIMIT_DISPLAY_SIZE = 10;
 
@@ -22,7 +21,6 @@ class ThreadView extends BaseView {
         $this->responseDao = new BbsResponseDao();
         
         $this->thread = $this->threadDao->getThreadById($threadId);
-        $this->responseList = $this->responseDao->getAllResponseByThreadId($threadId);
     }
 
     /**
@@ -33,10 +31,13 @@ class ThreadView extends BaseView {
     }
 
     /**
+     * 定数(LIMIT_DISPLAY_SIZE)に設定した件数分のレスポンスリストを取得する
      * @return array|null スレッドのレスポンスリストを返す
      */
     public function getResponseList() {
-        return $this->responseList;
+        $offset = self::getLimitDisplaySize() * ($this->getCurrentPageNumber() - 1);
+        $threadId = self::getThread()->getId();
+        return $this->responseDao->getResponseInLimit($threadId, $this->getLimitDisplaySize(), $offset);
     }
 
     /**
