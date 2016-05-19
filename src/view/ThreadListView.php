@@ -1,0 +1,67 @@
+<?php
+require_once(dirname(__FILE__) . './../dao/BbsThreadDao.php');
+require_once('BaseView.php');
+
+class ThreadListView extends BaseView {
+    private $threadDao;
+    
+    const LIMIT_DISPLAY_SIZE = 10;
+    
+    /**
+     * ThreadListView constructor.
+     */
+    public function __construct() {
+        $this->threadDao = new BbsThreadDao();
+    }
+
+    /**
+     * 定数:LIMIT_DISPLAY_SIZEで設定した件数分のスレッド一覧を取得する
+     * @return string スレッド一覧の情報を<tr>,<td>タグで囲んだ文字列で返す。スレッドが存在しない場合は空文字を返す。
+     */
+    public function showThreadList() {
+        $result = "";
+        $offset = self::getLimitDisplaySize() * ($this->getCurrentPageNumber() - 1);
+        $threadList = $this->threadDao->getThreadInLimit(self::getLimitDisplaySize(), $offset);
+
+        foreach ((array)$threadList as $thread) {
+            $result .= self::convertThreadIntoHtml($thread);
+        }
+
+        return $result;
+    }
+
+    /**
+     * タイトルの項目には<a>タグでスレッドIDをGETでスレッド表示画面に渡している。
+     * @param $thread BbsThreadList スレッド情報が入ったBbsThreadListオブジェクト
+     * @return string スレッドの情報を<tr>,<td>タグで囲んだ文字列で返す。
+     */
+    private function convertThreadIntoHtml($thread) {
+        $threadRow = "
+                <tr>
+                <td>{$thread->getId()}</td>
+                <td><a href='Thread.php?thread-id={$thread->getId()}'>{$thread->getTitle()}</a></td>
+                <td>{$thread->getComments()}</td>
+                <td>{$thread->getCreationDate()}</td>
+                </tr>
+                " . PHP_EOL;
+
+        return $threadRow;
+    }
+
+    /**
+     * 総レコード数を取得する
+     * @return int Viewで表示している件数ではなく、テーブルに保存されている総レコード数。int型にキャストして返却。
+     */
+    protected function getMaxRowCount() {
+        return (int) $this->threadDao->getMaxRowCount();
+    }
+
+    /**
+     * スレッド一覧の最大表示数を取得する
+     * @return int スレッドやレスポンスの最大表示数を返す。返却時はint型にキャストする。
+     */
+    public function getLimitDisplaySize() {
+        return (int) self::LIMIT_DISPLAY_SIZE;
+    }
+
+}

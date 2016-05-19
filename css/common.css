@@ -1,0 +1,54 @@
+.box-container {
+    overflow: hidden;
+}
+
+.box-container .box {
+    float: left;
+}
+
+.box-container .box .page {
+    margin-right: 10px;
+    display: inline;
+}
+
+#create-thread p, #post-response p {
+    display: inline;
+    margin-right: 10px;
+}
+
+#thread-list table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#thread-list table thead, tbody {
+    border-bottom: solid 1px;
+    text-align: left;
+}
+
+#thread-title {
+    color: brown;
+    display: inline;
+}
+
+#bbs-response p {
+    display: inline;
+}
+
+#bbs-response p.comment {
+    display: inline-block;
+    margin: 0 0 10px 30px;
+
+}
+
+#bbs-response p.comment-number, p.mail-address {
+    padding-right: 5px;
+}
+
+#bbs-back {
+    margin-right: 10px;
+    display: inline;
+}
+
+
