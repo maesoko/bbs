@@ -33,12 +33,12 @@ $threadListView = new ThreadListView();
     <div class="box-container">
         <div class="box">
             <p class="page">
-                <?php echo $threadListView->getPreviousPage("＜＜前の10件")?>
+                <?php echo $threadListView->getPreviousPage("＜＜前の{$threadListView->getLimitDisplaySize()}件")?>
             </p>
         </div>
         <div class="box">
             <p class="page">
-                <?php echo $threadListView->getNextPage("次の10件＞＞")?>
+                <?php echo $threadListView->getNextPage("次の{$threadListView->getLimitDisplaySize()}件＞＞")?>
             </p>
         </div>
     </div>
