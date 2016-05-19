@@ -2,13 +2,15 @@
 require_once(dirname(__FILE__) . './../dao/BbsThreadDao.php');
 require_once(dirname(__FILE__) . './../dao/BbsResponseDao.php');
 require_once(dirname(__FILE__) . './../model/BbsResponse.php');
+require_once('BaseView.php');
 
-class ThreadView {
+class ThreadView extends BaseView {
     private $threadDao;
     private $responseDao;
 
     private $thread;
-    private $responseList;
+
+    const LIMIT_DISPLAY_SIZE = 10;
 
     /**
      * ThreadView constructor.
@@ -19,7 +21,6 @@ class ThreadView {
         $this->responseDao = new BbsResponseDao();
         
         $this->thread = $this->threadDao->getThreadById($threadId);
-        $this->responseList = $this->responseDao->getAllResponseByThreadId($threadId);
     }
 
     /**
@@ -30,10 +31,13 @@ class ThreadView {
     }
 
     /**
+     * 定数(LIMIT_DISPLAY_SIZE)に設定した件数分のレスポンスリストを取得する
      * @return array|null スレッドのレスポンスリストを返す
      */
     public function getResponseList() {
-        return $this->responseList;
+        $offset = self::getLimitDisplaySize() * ($this->getCurrentPageNumber() - 1);
+        $threadId = self::getThread()->getId();
+        return $this->responseDao->getResponseInLimit($threadId, $this->getLimitDisplaySize(), $offset);
     }
 
     /**
@@ -56,4 +60,29 @@ class ThreadView {
         $this->responseDao->insertResponse($response);
     }
 
+    /**
+     * 総レコード数を取得する
+     * @return int Viewで表示している件数ではなく、テーブルに保存されている総レコード数。int型にキャストして返却。
+     */
+    protected function getMaxRowCount() {
+        return (int) $this->responseDao->getMaxRowCountByThreadId($this->getThread()->getId());
+    }
+
+    /**
+     * スレッドやレスポンスの最大表示数を取得する。
+     * @return int スレッドやレスポンスの最大表示数を返す。返却時はint型にキャストする。
+     */
+    public function getLimitDisplaySize() {
+        return (int) self::LIMIT_DISPLAY_SIZE;
+    }
+
+    /**
+     * ページのリンクが入ったアンカータグを取得する
+     * @param $pageNumber int ページ番号
+     * @param $message string <a>タグに表示するメッセージ
+     * @return string 遷移先のページ番号のリンクが入ったアンカータグを返す。
+     */
+    public function getAnchorTagToPage($pageNumber, $message) {
+        return "<a href='{$_SERVER['SCRIPT_NAME']}?thread-id={$this->getThread()->getId()}&page={$pageNumber}'>{$message}</a>";
+    }
 }
