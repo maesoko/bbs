@@ -1,13 +1,12 @@
 <?php
+require_once('BaseModel.php');
 
-class BbsResponse {
-    private $id;
+class BbsResponse extends BaseModel {
     private $thread_id;
     private $comment_number;
     private $comment;
     private $name;
     private $mail_address;
-    private $write_date;
 
     const DEFAULT_NAME = "名無しさん";
 
@@ -36,13 +35,6 @@ class BbsResponse {
         $instance->mail_address = $mail_address;
         
         return $instance;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId() {
-        return $this->id;
     }
 
     /**
@@ -78,13 +70,6 @@ class BbsResponse {
      */
     public function getMailAddress() {
         return $this->mail_address;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getWriteDate() {
-        return $this->write_date;
     }
 
 }
