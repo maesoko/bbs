@@ -75,6 +75,7 @@ class ThreadView extends BaseView {
 
     /**
      * ページのリンクが入ったアンカータグを取得する
+     * ページ番号とスレッドIDをGETで渡している
      * @param $pageNumber int ページ番号
      * @param $message string <a>タグに表示するメッセージ
      * @return string 遷移先のページ番号のリンクが入ったアンカータグを返す。
