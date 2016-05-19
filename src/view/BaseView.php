@@ -24,7 +24,7 @@ abstract class BaseView {
 
     /**
      * 前ページが存在するかを調べる
-     * @param $previousPage
+     * @param $previousPage int 前ページのページ番号
      * @return bool 前ページが存在する場合はtrue|そうでない場合はfalse
      */
     private function isPreviousPageExists($previousPage) {
