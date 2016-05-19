@@ -60,7 +60,7 @@ class ThreadListView extends BaseView {
      * スレッド一覧の最大表示数を取得する
      * @return int スレッドやレスポンスの最大表示数を返す。返却時はint型にキャストする。
      */
-    protected function getLimitDisplaySize() {
+    public function getLimitDisplaySize() {
         return (int) self::LIMIT_DISPLAY_SIZE;
     }
 

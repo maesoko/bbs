@@ -12,7 +12,7 @@ abstract class BaseView {
      * スレッドやレスポンスの最大表示数を取得する。
      * @return int スレッドやレスポンスの最大表示数を返す。返却時はint型にキャストする。
      */
-    protected abstract function getLimitDisplaySize();
+    public abstract function getLimitDisplaySize();
 
     /**
      * $_GET['page']に保存されている現在のページ番号を取得する。
