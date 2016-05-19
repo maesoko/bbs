@@ -50,7 +50,7 @@ abstract class BaseView {
         $previousPage = $this->getCurrentPageNumber() - 1;
 
         return self::isPreviousPageExists($previousPage) ?
-            self::getAnchorTagToPage($previousPage, $message) : $message;
+            $this->getAnchorTagToPage($previousPage, $message) : $message;
     }
 
     /**
@@ -62,7 +62,7 @@ abstract class BaseView {
         $nextPage = $this->getCurrentPageNumber() + 1;
 
         return self::isNextPageExists($nextPage) ?
-            self::getAnchorTagToPage($nextPage, $message) : $message;
+            $this->getAnchorTagToPage($nextPage, $message) : $message;
     }
 
     /**
@@ -71,7 +71,7 @@ abstract class BaseView {
      * @param $message string <a>タグに表示するメッセージ
      * @return string 遷移先のページ番号のリンクが入ったアンカータグを返す。
      */
-    private function getAnchorTagToPage($pageNumber, $message) {
+    protected function getAnchorTagToPage($pageNumber, $message) {
         return "<a href='{$_SERVER['SCRIPT_NAME']}?page={$pageNumber}'>{$message}</a>";
     }
 
