@@ -1,41 +1,20 @@
 <?php
+require_once('BaseModel.php');
 
-class BbsThread {
-    private $id;
-    private $title;
-    private $creationDate;
+class BbsThread extends BaseModel {
+    protected $title;
 
     /**
      * BbsThread constructor.
-     * @param $id int スレッドID
-     * @param $title string スレッドのタイトル
-     * @param $creationDate string スレッドの作成日(yyyy-MM-dd)
+     * O/Rマッピングに対応するためコンストラクタにはパラメータ設定しないように。
      */
-    public function __construct($id, $title, $creationDate) {
-        $this->id = $id;
-        $this->title = $title;
-        $this->creationDate = $creationDate;
-    }
-
-    /**
-     * @return int スレッドIDを返す。
-     */
-    public function getId() {
-        return $this->id;
-    }
+    public function __construct() {}
 
     /**
      * @return string スレッドのタイトルを返す。
      */
     public function getTitle() {
         return $this->title;
-    }
-
-    /**
-     * @return string スレッドの作成日を'yyyy-MM-dd'形式の文字列で返す。
-     */
-    public function getCreationDate() {
-        return $this->creationDate;
     }
 
 }

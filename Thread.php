@@ -51,7 +51,7 @@ if (!is_null($threadView) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="box"><p class="comment-number"><?php echo $response->getCommentNumber() ?></p></div>
             <div class="box"><p class="name">名前:<?php echo $response->getName() ?></p></div>
             <div class="box"><p class="mail-address">[<?php echo $response->getMailAddress() ?>]</p></div>
-            <div class="box"><p class="post-date">投稿日:<?php echo $response->getWriteDate() ?></p></div>
+            <div class="box"><p class="post-date">投稿日:<?php echo $response->getCreationDate() ?></p></div>
         </div>
 
         <p class="comment"><?php echo $response->getComment() ?></p>

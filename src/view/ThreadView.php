@@ -47,15 +47,12 @@ class ThreadView extends BaseView {
     public function postResponse(array $params) {
         $commentNumber = count(self::getResponseList()) + 1;
 
-        $response = new BbsResponse(
-            null,
+        $response = BbsResponse::newInstance(
             self::getThread()->getId(),
             $commentNumber,
             $params['comment'],
             $params['name'],
-            $params['mail_address'],
-            null
-        );
+            $params['mail_address']);
 
         $this->responseDao->insertResponse($response);
     }
