@@ -1,55 +1,54 @@
 <?php
+require_once('BaseModel.php');
 
-class BbsResponse {
-    private $id;
-    private $threadId;
-    private $commentNumber;
+class BbsResponse extends BaseModel {
+    private $thread_id;
+    private $comment_number;
     private $comment;
     private $name;
-    private $mailAddress;
-    private $writeDate;
+    private $mail_address;
 
     const DEFAULT_NAME = "名無しさん";
 
     /**
      * BbsResponse constructor.
-     * @param $id int|null
-     * @param $threadId int
-     * @param $commentNumber int
-     * @param $comment string
-     * @param $name string|null
-     * @param $mailAddress string|null
-     * @param $writeDate string|null
+     * PDOStatement::fetchAll(PDO::FETCH_CLASS, 'class_name'), PDOStatement::fetchObject('class_name')のO/Rマッピングに
+     * 対応するためコンストラクタのパラメータは無しにした。
      */
-    public function __construct($id, $threadId, $commentNumber, $comment, $name, $mailAddress, $writeDate) {
-        $this->id = $id;
-        $this->threadId = $threadId;
-        $this->commentNumber = $commentNumber;
-        $this->comment = $comment;
-        $this->name = $name;
-        $this->mailAddress = $mailAddress;
-        $this->writeDate = $writeDate;
-    }
+    public function __construct() {}
 
     /**
-     * @return int|null
+     * BbsResponseクラスのインスタンスを取得
+     * @param $thread_id int 書き込むスレッドのID
+     * @param $comment_number int レスの番号
+     * @param $comment string 書き込む内容
+     * @param $name string ハンドルネーム
+     * @param $mail_address string Eメールアドレス
+     * @return BbsResponse 渡されたパラメータを元にBbsResponseクラスのインスタンス生成して返す
      */
-    public function getId() {
-        return $this->id;
+    public static function newInstance($thread_id, $comment_number, $comment, $name, $mail_address) {
+        $instance = new BbsResponse();
+        $instance->thread_id = $thread_id;
+        $instance->comment_number = $comment_number;
+        $instance->comment = $comment;
+        $instance->name = $name;
+        $instance->mail_address = $mail_address;
+        
+        return $instance;
     }
 
     /**
      * @return int
      */
     public function getThreadId() {
-        return $this->threadId;
+        return $this->thread_id;
     }
 
     /**
      * @return int
      */
     public function getCommentNumber() {
-        return $this->commentNumber;
+        return $this->comment_number;
     }
 
     /**
@@ -70,14 +69,7 @@ class BbsResponse {
      * @return null|string
      */
     public function getMailAddress() {
-        return $this->mailAddress;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getWriteDate() {
-        return $this->writeDate;
+        return $this->mail_address;
     }
 
 }

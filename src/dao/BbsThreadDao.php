@@ -21,18 +21,7 @@ class BbsThreadDao extends BaseDao {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
 
-        $result = null;
-        $records = $stmt->fetchAll();
-        foreach ($records as $record) {
-            $result[] = new BbsThreadList(
-                $record["id"],
-                $record["title"],
-                $record["creation_date"],
-                $record["comments"]
-            );
-        }
-
-        return $result;
+        return $stmt->fetchAll(PDO::FETCH_CLASS, 'BbsThreadList');
     }
 
     /**
@@ -53,18 +42,7 @@ class BbsThreadDao extends BaseDao {
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
 
-        $result = null;
-        $records = $stmt->fetchAll();
-        foreach ($records as $record) {
-            $result[] = new BbsThreadList(
-                $record["id"],
-                $record["title"],
-                $record["creation_date"],
-                $record["comments"]
-            );
-        }
-
-        return $result;
+        return $stmt->fetchAll(PDO::FETCH_CLASS, 'BbsThreadList');
     }
 
     /**
@@ -92,9 +70,7 @@ class BbsThreadDao extends BaseDao {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        $record = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        return new BbsThread($record['id'], $record['title'], $record['creation_date']);
+        return $stmt->fetchObject('BbsThread');
     }
 
     /**
