@@ -61,4 +61,17 @@ class BbsResponseDao extends BaseDao {
         
         return $results;
     }
+
+    /**
+     * @param $threadId int 取得するスレッドのID
+     * @return int 対象スレッドの総レス数を返す
+     */
+    public function getMaxRowCountByThreadId($threadId) {
+        $sql = 'SELECT * FROM response WHERE thread_id = :threadId';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':threadId', $threadId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
 }
