@@ -26,24 +26,20 @@ class BbsResponseDao extends BaseDao {
     /**
      * $idで指定されたレスポンスを取得する。
      * @param $id int 取得したいレスポンスのID
-     * @return BbsResponse レスポンスの情報が入ったBbsResponseオブジェクトを返す。
+     * @return BbsResponse BbsResponseオブジェクトを返す。
      */
     public function getResponseById($id) {
         $sql = "SELECT * FROM response WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([':id' => $id]);
         
-        $record = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        return new BbsResponse(
-            $record['id'], $record['thread_id'], $record['comment_number'], $record['comment'],
-            $record['name'], $record['mail_address'], $record['write_date']);
+        return $stmt->fetchObject('BbsResponse');
     }
 
     /**
      * スレッドのレスポンス一覧を取得する
      * @param $threadId int 取得するスレッドのID
-     * @return array|null レスポンスの情報が入った配列を返す。|レスポンスが存在しない場合はnullを返す。
+     * @return array|null BbsResponseオブジェクトの配列を返す。|レスポンスの取得に失敗した場合はfalseを返す。
      */
     public function getAllResponseByThreadId($threadId) {
         $sql = "SELECT * FROM response WHERE thread_id = :threadId";
@@ -51,15 +47,7 @@ class BbsResponseDao extends BaseDao {
         $stmt->bindParam(':threadId', $threadId, PDO::PARAM_INT);
         $stmt->execute();
 
-        $results = null;
-        $records = $stmt->fetchAll();
-        foreach ($records as $record) {
-            $results[] = new BbsResponse($record['id'], $record['thread_id'], 
-                $record['comment_number'], $record['comment'],
-                $record['name'], $record['mail_address'], $record['write_date']);
-        }
-        
-        return $results;
+        return $stmt->fetchAll(PDO::FETCH_CLASS, "BbsResponse");
     }
 
     /**
@@ -67,7 +55,7 @@ class BbsResponseDao extends BaseDao {
      * @param $threadId int 対象のスレッドID
      * @param $limit int 表示件数
      * @param $offset int 取得開始位置
-     * @return array|null レスポンスの情報が入ったBbsResponseクラスの配列を返す。|レスポンスが存在しない場合はnullを返す。
+     * @return array|null BbsResponseオブジェクトの配列を返す。|レスポンスの取得に失敗した場合はfalseを返す。
      */
     public function getResponseInLimit($threadId, $limit, $offset) {
         $sql = "SELECT * FROM response WHERE thread_id = :threadId
@@ -78,19 +66,11 @@ class BbsResponseDao extends BaseDao {
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
 
-        $results = null;
-        $records = $stmt->fetchAll();
-        foreach ($records as $record) {
-            $results[] = new BbsResponse($record['id'], $record['thread_id'],
-                $record['comment_number'], $record['comment'],
-                $record['name'], $record['mail_address'], $record['write_date']);
-        }
-
-        return $results;
+        return $stmt->fetchAll(PDO::FETCH_CLASS, "BbsResponse");
     }
 
     /**
-     * @param $threadId int 取得するスレッドのID
+     * @param $threadId int 取得する対象スレッドのID
      * @return int 対象スレッドの総レス数を返す
      */
     public function getMaxRowCountByThreadId($threadId) {
