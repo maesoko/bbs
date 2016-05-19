@@ -27,8 +27,16 @@ if (!is_null($threadView) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 <div class="box-container">
     <div class="box"><p id="bbs-back"><a href="index.php">■掲示板に戻る■</a></p></div>
-    <div class="box"><p class="page"><a href="#">＜＜前の10件</a></p></div>
-    <div class="box"><p class="page"><a href="#">次の10件＞＞</a></p></div>
+    <div class="box">
+        <p class="page">
+            <?php echo $threadView->getPreviousPage("＜＜前の{$threadView->getLimitDisplaySize()}件")?>
+        </p>
+    </div>
+    <div class="box">
+        <p class="page">
+            <?php echo $threadView->getNextPage("次の{$threadView->getLimitDisplaySize()}件＞＞")?>
+        </p>
+    </div>
 </div>
 <hr />
 <h1 id="thread-title"><?php echo $threadView->getThread()->getTitle()?></h1>
