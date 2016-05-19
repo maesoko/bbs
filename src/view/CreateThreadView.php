@@ -39,9 +39,15 @@ class CreateThreadView {
      */
     public function createThread($params) {
         $this->thread = $this->threadDao->insertThreadByTitle($params['title']);
-
-        $response = new BbsResponse(
-            null, $this->thread->getId(), 1, $params['comment'], $params['name'], $params['mail_address'], null);
+        $commentNumber = 1;
+        
+        $response = BbsResponse::newInstance(
+            $this->thread->getId(),
+            $commentNumber,
+            $params['comment'],
+            $params['name'],
+            $params['mail_address']);
+        
         $this->response = $this->responseDao->insertResponse($response);
     }
 
