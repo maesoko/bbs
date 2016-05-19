@@ -75,4 +75,14 @@ class ThreadView extends BaseView {
     public function getLimitDisplaySize() {
         return (int) self::LIMIT_DISPLAY_SIZE;
     }
+
+    /**
+     * ページのリンクが入ったアンカータグを取得する
+     * @param $pageNumber int ページ番号
+     * @param $message string <a>タグに表示するメッセージ
+     * @return string 遷移先のページ番号のリンクが入ったアンカータグを返す。
+     */
+    public function getAnchorTagToPage($pageNumber, $message) {
+        return "<a href='{$_SERVER['SCRIPT_NAME']}?thread-id={$this->getThread()->getId()}&page={$pageNumber}'>{$message}</a>";
+    }
 }
