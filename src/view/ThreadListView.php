@@ -4,7 +4,9 @@ require_once('BaseView.php');
 
 class ThreadListView extends BaseView {
     private $threadDao;
-
+    
+    const LIMIT_DISPLAY_SIZE = 10;
+    
     /**
      * ThreadListView constructor.
      */
@@ -13,11 +15,14 @@ class ThreadListView extends BaseView {
     }
 
     /**
+     * 定数:LIMIT_DISPLAY_SIZEで設定した件数分のスレッド一覧を取得する
      * @return string スレッド一覧の情報を<tr>,<td>タグで囲んだ文字列で返す。スレッドが存在しない場合は空文字を返す。
      */
     public function showThreadList() {
         $result = "";
-        $threadList = $this->threadDao->getAllThreads();
+        $offset = self::getLimitDisplaySize() * ($this->getCurrentPageNumber() - 1);
+        $threadList = $this->threadDao->getThreadInLimit(self::getLimitDisplaySize(), $offset);
+
         foreach ((array)$threadList as $thread) {
             $result .= self::convertThreadIntoHtml($thread);
         }
@@ -26,7 +31,7 @@ class ThreadListView extends BaseView {
     }
 
     /**
-     * タイトルの項目には<a>タグでスレッドIDをスレッド表示画面に渡している。
+     * タイトルの項目には<a>タグでスレッドIDをGETでスレッド表示画面に渡している。
      * @param $thread BbsThreadList スレッド情報が入ったBbsThreadListオブジェクト
      * @return string スレッドの情報を<tr>,<td>タグで囲んだ文字列で返す。
      */
@@ -43,7 +48,6 @@ class ThreadListView extends BaseView {
         return $threadRow;
     }
 
-
     /**
      * 総レコード数を取得する
      * @return int Viewで表示している件数ではなく、テーブルに保存されている総レコード数。int型にキャストして返却。
@@ -51,4 +55,13 @@ class ThreadListView extends BaseView {
     protected function getMaxRowCount() {
         return (int) $this->threadDao->getMaxRowCount();
     }
+
+    /**
+     * スレッド一覧の最大表示数を取得する
+     * @return int スレッドやレスポンスの最大表示数を返す。返却時はint型にキャストする。
+     */
+    protected function getLimitDisplaySize() {
+        return (int) self::LIMIT_DISPLAY_SIZE;
+    }
+
 }
