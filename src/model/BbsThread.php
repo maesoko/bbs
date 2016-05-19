@@ -1,21 +1,15 @@
 <?php
 
 class BbsThread {
-    private $id;
-    private $title;
-    private $creationDate;
+    protected $id;
+    protected $title;
+    protected $creation_date;
 
     /**
      * BbsThread constructor.
-     * @param $id int スレッドID
-     * @param $title string スレッドのタイトル
-     * @param $creationDate string スレッドの作成日(yyyy-MM-dd)
+     * O/Rマッピングに対応するためコンストラクタにはパラメータ設定しないように。
      */
-    public function __construct($id, $title, $creationDate) {
-        $this->id = $id;
-        $this->title = $title;
-        $this->creationDate = $creationDate;
-    }
+    public function __construct() {}
 
     /**
      * @return int スレッドIDを返す。
@@ -35,7 +29,7 @@ class BbsThread {
      * @return string スレッドの作成日を'yyyy-MM-dd'形式の文字列で返す。
      */
     public function getCreationDate() {
-        return $this->creationDate;
+        return $this->creation_date;
     }
 
 }

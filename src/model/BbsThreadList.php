@@ -5,16 +5,11 @@ class BbsThreadList extends BbsThread {
     private $comments;
 
     /**
-     * BbsThread constructor.
-     * @param $id int スレッドID
-     * @param $title string スレッドのタイトル
-     * @param $creationDate string スレッドの作成日(yyyy-MM-dd)
-     * @param $comments int スレッドのレスの数
+     * BbsThreadList constructor.
+     * PDOStatement::fetchAll(PDO::FETCH_CLASS, 'class_name'), PDOStatement::fetchObject('class_name')のO/Rマッピングに
+     * 対応するためコンストラクタのパラメータは無しにした。
      */
-    public function __construct($id, $title, $creationDate, $comments) {
-        parent::__construct($id, $title, $creationDate);
-        $this->comments = $comments;
-    }
+    public function __construct() {}
 
     /**
      * @return int レスの数を返す。
