@@ -39,7 +39,7 @@ class BbsResponseDao extends BaseDao {
     /**
      * スレッドのレスポンス一覧を取得する
      * @param $threadId int 取得するスレッドのID
-     * @return array|null BbsResponseオブジェクトの配列を返す。|レスポンスの取得に失敗した場合はfalseを返す。
+     * @return array|false BbsResponseオブジェクトの配列を返す。|レスポンスの取得に失敗した場合はfalseを返す。
      */
     public function getAllResponseByThreadId($threadId) {
         $sql = "SELECT * FROM response WHERE thread_id = :threadId";
@@ -55,7 +55,7 @@ class BbsResponseDao extends BaseDao {
      * @param $threadId int 対象のスレッドID
      * @param $limit int 表示件数
      * @param $offset int 取得開始位置
-     * @return array|null BbsResponseオブジェクトの配列を返す。|レスポンスの取得に失敗した場合はfalseを返す。
+     * @return array|false BbsResponseオブジェクトの配列を返す。|レスポンスの取得に失敗した場合はfalseを返す。
      */
     public function getResponseInLimit($threadId, $limit, $offset) {
         $sql = "SELECT * FROM response WHERE thread_id = :threadId
