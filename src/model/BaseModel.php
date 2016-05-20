@@ -12,7 +12,7 @@ class BaseModel {
     }
 
     /**
-     * @return int
+     * @return string 'yyyy-MM-dd'形式で日付を返す
      */
     public function getCreationDate() {
         return $this->creation_date;
