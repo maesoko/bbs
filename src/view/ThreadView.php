@@ -32,7 +32,7 @@ class ThreadView extends BaseView {
 
     /**
      * 定数(LIMIT_DISPLAY_SIZE)に設定した件数分のレスポンスリストを取得する
-     * @return array|null スレッドのレスポンスリストを返す
+     * @return array|false スレッドのレスポンスリストを返す|レスポンスの取得に失敗した場合はfalseを返す。
      */
     public function getResponseList() {
         $offset = self::getLimitDisplaySize() * ($this->getCurrentPageNumber() - 1);
