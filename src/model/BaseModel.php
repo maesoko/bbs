@@ -5,7 +5,7 @@ class BaseModel {
     protected $creation_date;
 
     /**
-     * @return int
+     * @return int オブジェクトのID,テーブルにおけるPRIMARY KEY
      */
     public function getId() {
         return $this->id;
@@ -18,5 +18,4 @@ class BaseModel {
         return $this->creation_date;
     }
 
-    
 }
