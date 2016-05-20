@@ -42,7 +42,7 @@ class ThreadView extends BaseView {
 
     /**
      * スレッドへの書き込みを行う
-     * @param array $params $_POSTから取得したレスの情報
+     * @param array $params レスポンス作成フォームの入力値が入った配列
      */
     public function postResponse(array $params) {
         $commentNumber = count(self::getResponseList()) + 1;
