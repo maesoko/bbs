@@ -40,7 +40,7 @@ class ThreadListView extends BaseView {
         $threadRow = "
                 <tr>
                 <td>{$thread->getId()}</td>
-                <td><a href='Thread.php?thread-id={$thread->getId()}'>{$thread->getTitle()}</a></td>
+                <td>{$this->getAnchorTagToThread($thread->getId(), $thread->getTitle())}</td>
                 <td>{$thread->getComments()}</td>
                 <td>{$thread->getCreationDate()}</td>
                 </tr>
@@ -63,6 +63,17 @@ class ThreadListView extends BaseView {
      */
     public function getLimitDisplaySize() {
         return (int) self::LIMIT_DISPLAY_SIZE;
+    }
+
+    /**
+     * スレッドページへのアンカータグを取得する
+     * @param int $threadId スレッドのID,GETでスレッド表示画面へ渡す
+     * @param string $title リンクに表示するスレッドタイトル
+     * @return string アンカータグを文字列で返す
+     */
+    protected function getAnchorTagToThread($threadId, $title) {
+        //TODO:BaseView::getAnchorTagToPageと同じような処理を書いてるので、共通化できるように工夫するべき。
+        return "<a href='Thread.php?thread-id={$threadId}'>{$title}</a>";
     }
 
 }

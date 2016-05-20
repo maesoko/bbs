@@ -11,13 +11,18 @@ class CreateThreadView {
 
     /**
      * CreateThreadView constructor.
-     * @param $params array $_POSTから取得できるスレッドとレスポンスの情報が入った配列
+     * @param $params array スレッド作成フォームの入力値が入った配列
      */
     public function __construct($params) {
         $this->threadDao = new BbsThreadDao();
         $this->responseDao = new BbsResponseDao();
 
-        self::createThread($params);
+        $this->thread = $this->createThread($params['title']);
+        $this->response = $this->createResponse(
+            $this->thread,
+            $params['comment'],
+            $params['name'],
+            $params['mail_address']);
     }
 
     /**
@@ -34,37 +39,46 @@ class CreateThreadView {
     }
 
     /**
-     * $paramsに渡された情報を元にスレッドを新規作成し、そのスレッドに1番目のレスを追加
-     * @param $params array スレッドタイトルとレスの値が入った配列
+     * $titleでスレッドを新規作成
+     * @param $title string スレッドタイトル
+     * @return BbsThread 作成されたスレッドをBbsThreadオブジェクトとして返す。
      */
-    public function createThread($params) {
-        $this->thread = $this->threadDao->insertThreadByTitle($params['title']);
-        $commentNumber = 1;
-        
-        $response = BbsResponse::newInstance(
-            $this->thread->getId(),
-            $commentNumber,
-            $params['comment'],
-            $params['name'],
-            $params['mail_address']);
-        
-        $this->response = $this->responseDao->insertResponse($response);
+    private function createThread($title) {
+        return $this->threadDao->insertThreadByTitle($title);
     }
 
     /**
-     * @return BbsThread
+     * 対象のスレッドに一番目の書き込みを投稿する
+     * @param $thread BbsThread 書き込みを投稿するスレッド
+     * @param $comment string 書き込む内容
+     * @param $name string 投稿者名
+     * @param $mailAddress string Eメールアドレス
+     * @return BbsResponse 投稿したレスポンスをBbsResponseオブジェクトとして返す。
+     */
+    private function createResponse($thread, $comment, $name, $mailAddress) {
+        $commentNumber = 1;
+        $response = BbsResponse::newInstance(
+            $thread->getId(),
+            $commentNumber,
+            $comment,
+            $name,
+            $mailAddress);
+
+        return $this->responseDao->insertResponse($response);
+    }
+
+    /**
+     * @return BbsThread 新規作成したスレッド
      */
     public function getThread() {
         return $this->thread;
     }
 
     /**
-     * @return BbsResponse
+     * @return BbsResponse >>1に投稿されたレスポンス
      */
     public function getResponse() {
         return $this->response;
     }
-
-
 
 }

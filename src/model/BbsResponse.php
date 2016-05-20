@@ -38,35 +38,35 @@ class BbsResponse extends BaseModel {
     }
 
     /**
-     * @return int
+     * @return int スレッドID
      */
     public function getThreadId() {
         return $this->thread_id;
     }
 
     /**
-     * @return int
+     * @return int レス番号
      */
     public function getCommentNumber() {
         return $this->comment_number;
     }
 
     /**
-     * @return string
+     * @return string レスの内容
      */
     public function getComment() {
         return $this->comment;
     }
 
     /**
-     * @return string
+     * @return string 名前
      */
     public function getName() {
         return empty($this->name) ? self::DEFAULT_NAME : $this->name;
     }
 
     /**
-     * @return null|string
+     * @return string|null メールアドレス|入力がない場合はnull
      */
     public function getMailAddress() {
         return $this->mail_address;
